@@ -1,5 +1,7 @@
-\documentclass[]{article}
 
+\documentclass[]{article}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage{amsmath}
 %opening
 \title{}
 \author{}
@@ -78,7 +80,7 @@ Add-Binary-Integer(A, B)\\
 17 while j$>$0 \\
 18 \ \ \ \ C[m] = A[i] xor carry\\
 19 \ \ \ \ carry = A[i] \& carry\\
-20 \ \ \ \ j = j-1
+20 \ \ \ \ j = j-1\\
 21 \ \ \ \ m = m-1\\
 
 \item[2.2-1] $$ n^3/1000 - 100n^2 -100n +3 = \Theta(n^3) $$
@@ -100,10 +102,107 @@ Worst case is n elements\\
 Worst case time complexity: $$ \Theta(n) $$
 Average case time complexity: $$ \Theta(n) $$
 
+\item[2.2-4]
 How to modify almost any algorithm to have a good best-case running time?\\
 I am not sure, maybe storing the result for some special/frequent cases to achieve O(1) complexity in best case.
 
+\item[2.3-1]Merge Sort on A = \{3, 41, 52, 26, 38, 57, 9, 49\}\\
+This is very simple, just skip it.
+
+\item[2.3-2] Rewrite Merge procedure so that it doesn't use sentinels, instead stopping once either array L or R has had all its elements copied back to A and then copying the reminder of the other array back into A.
+
+//A: array\\
+//L is A[p:q] R is A[q+1:r]\\
+Merge(A, p, q, r)\\
+1 let B[1:r-p+1] be a copy of A\\
+2 i=p; j=q+1; k=1;\\
+3 while i$<=$q and j$<=$r\\
+4 \ \ \ \ if B[i]$<$B[j]\\
+5 \ \ \ \ \ \ \ \ A[k] = B[i]\\
+6 \ \ \ \ \ \ \ \ k=k+1; i=i+1;\\
+7 \ \ \ \ else\\
+8 \ \ \ \ \ \ \ \ A[k] = B[j]\\
+9 \ \ \ \ \ \ \ \ k=k+1; j=j+1;\\
+10 while i$<=$q\\
+11 \ \ \ \ A[k]=B[i]\\
+12 \ \ \ \ k=k+1; i=i+1;\\
+13 while j$<=$r\\
+14 \ \ \ \ A[k]=B[j]\\
+15 \ \ \ \ k=k+1; j=j+1;\\
+
+\item[2.3-3] Use mathematical induction to show that when n is an exact power of 2, the solution of the recurrence is $T(n) = n\lg(n)$
+
+\[T(n) = \begin{cases}
+2&\text{if n = 2},\\
+2T(n/2) + n&\text{if $n=2^k$, for $k>1$}
+\end{cases}\]
+
+\noindent
+For $n=2$, $T(2) = 2 \lg(2) = 2$
+
+Suppose $T(n) = n\lg(n)\ \ \ \  \forall n=2^k<=m$
+
+For $n=2^{k+1}$, $ T(2^{k+1}) = 2T(2^{k}) + 2^{k+1} = (k+1)2^{k+1} = 2^{k+1}\lg(2^{k+1}) $
+
+By induction, it is proven that $T(n) = n\lg n$
+
+\item[2.3-4] Recurrence relation of insertion sort
+
+$$T(n) = T(n-1) + \Theta(n)$$
+
+*$\Theta(n)$ depends on the position that A[n] is inserted.
+
+\item[2.3-5] Binary-Search(A, v)
+
+\begin{algorithm}[H]
+\KwIn{A[1:n], v}
+\KwOut{index}
+$l=1; r=n$\\
+
+\While{$ l<=r $}
+{$i=(l+r)/2$\\
+ \If{$A[i]=v$}
+ {
+ 	return i
+ }\ElseIf{$A[i]<v$}
+ {
+ 	$l=i+1$
+ }\Else{$r=i-1$}
+}
+\Return NIL
+\end{algorithm}
+
+\item[2.3-6] Yes we can. The dilemma is that we are not searching for a certain value, but the first element that is smaller than the given number.
+
+The pseudo-code can be modified as follows
+
+Insertion-Sort(A)\\
+\begin{algorithm}[H]
+\KwIn{A[1:n]}
+\KwOut{A'[1:n] in sorted order}
+\For{$ i=2; i<=n; i=i+1 $}
+{
+ $key=A[i]$\\
+ $ l=1; r=A.length;$\\
+ \While{$l<=r$}
+ {	
+ 	$m=(l+r)/2$\\
+ 	\If{$A[m]>key $}
+ 	{
+ 		$r=m-1$
+ 	}\Else{ $l=m$ }
+ }
+ // now r is the position that A[i] should be inserted at
+ \For{$j=r; j<i; j=j+1$}
+ {
+ 	$A[j+1]=A[j]$
+ }
+ $A[r]=key$
+}
+\Return A[]
+\end{algorithm}
+
+*remain to be tested
+
 \end{enumerate}
-
-
 \end{document}
