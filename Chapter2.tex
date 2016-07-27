@@ -185,16 +185,11 @@ Insertion-Sort(A)\\
  $ l=1; r=A.length;$\\
  \While{$l<=r$}
  {	
- 	\If{$l=r$ and $A[l]<A[i]$}
- 	{
- 		$r=r+1$\\
- 		break
- 	}
  	$m=(l+r)/2$\\
  	\If{$A[m]>key $}
  	{
  		$r=m-1$
- 	}\Else{ $l=m$ }
+ 	}\Else{ $l=m$\\ \If{$l=r$}{$r=r+1$; break} }
  }
  // now r is the position that A[i] should be inserted at
  \For{$j=r; j<i; j=j+1$}
