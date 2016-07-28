@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.4)  28 JUL 2016 20:23
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.4)  28 JUL 2016 21:24
 entering extended mode
 **Chapter2.tex
 (C:\Users\thinkpad\Documents\note\CLRS_Solutions\Chapter2.tex
@@ -269,8 +269,13 @@ File: ./2-1RecursionTree.png Graphic file (type png)
 <use ./2-1RecursionTree.png>
 Package pdftex.def Info: ./2-1RecursionTree.png used on input line 229.
 (pdftex.def)             Requested size: 241.49895pt x 152.43723pt.
- [6 <C:/Users/thinkpad/Documents/note/CLRS_Solutions/2-1RecursionTree.png>]
-(C:\Users\thinkpad\Documents\note\CLRS_Solutions\Chapter2.aux) )
+
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
+
+ []
+
+[6 <C:/Users/thinkpad/Documents/note/CLRS_Solutions/2-1RecursionTree.png>]
+[7] (C:\Users\thinkpad\Documents\note\CLRS_Solutions\Chapter2.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
@@ -291,9 +296,9 @@ nts/type1/public/amsfonts/cm/cmr10.pfb><E:/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmr12.pfb><E:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><E:/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><E:/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb>
-Output written on Chapter2.pdf (6 pages, 134575 bytes).
+Output written on Chapter2.pdf (7 pages, 135829 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 67 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

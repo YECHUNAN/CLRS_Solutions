@@ -239,6 +239,16 @@ It is easy to guess that k can't exceed $\lg(n)$ asymptotically. Otherwise, the 
 
 d. Select k so that n/k is the largest number when insertion sort beats standard merge sort.
 
-\item[2-2] Correctness of bubble sort
+\item[2-2] Correctness of bubble sort\\
+
+a. There still remains a subtle restriction that the new A' array must contain exactly all the original elements in A.
+
+b. Loop invariant: at the entrance of each iteration, A[j:end] contains original elements of this range and A[j] is the smallest one among them. I'll skip the wordy justification with respect to initialization, maintain and termination.
+
+c. Loop invariant: at the entrance of each iteration, A[1:i-1] is in sorted order. 
+
+d. The worst case runtime is $ \Theta(n^2) $ as there will be (n-1)n/2 times comparisons when the array is in the exact descending order. Besides, there are much more swap operations than insertion sort, which cost more time copying memory.
+
+
 \end{enumerate}
 \end{document}
