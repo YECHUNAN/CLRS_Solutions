@@ -249,6 +249,85 @@ c. Loop invariant: at the entrance of each iteration, A[1:i-1] is in sorted orde
 
 d. The worst case runtime is $ \Theta(n^2) $ as there will be (n-1)n/2 times comparisons when the array is in the exact descending order. Besides, there are much more swap operations than insertion sort, which cost more time copying memory.
 
+\item[2-3] Correctness of Horner's rule\\
+a. The runtime is $$ T(n)=\Theta(n) $$
+
+b. \begin{algorithm}
+	$y=0$
+	\For{ i=0 to n }{
+		$temp=a_i$\\
+		\For{ j=1 to i}{
+			$temp=temp*x$
+		}
+		$y=y+temp$
+	}
+	return y
+\end{algorithm}
+
+The runtime is $$T(n)=\Theta(n^2)$$
+
+c. at i=n (entering the 1st loop), it sums from 0 to 1. This satisfies that the value of y is 0.
+
+Suppose that when entering the loop i=m, $ y=\sum\limits_{k=0}^{n-(m+1)} a_{k+m+1}x^k $, after the code being executed, $ y=a_{m+1} + x*\sum\limits_{k=0}^{n-(m+1)} a_{k+m+1}x^k \\
+= a_{m} + \sum\limits_{k=1}^{n-m} a_{k+m}x^k
+= \sum\limits_{k=0}^{n-m} a_{k+m}x^k = Y(i=m-1) $
+
+Thus the invariant is hold for all the iterations by induction.
+
+d. By the loop invariant, at the end of the loop, the result would be $$ y=\sum\limits_{k=0}^{n} a_{k}x^k $$
+
+which is directly equal to the result of the polynomial.
+
+\item[2-4] Inversions\\
+a. skip listing the inversions as they are trivial.
+
+b. The array with the strict descending order has the most inversions. It has $(n-1 + n-2 + ... + 1) = \frac{(n-1)n}{2}$ inversions.
+
+c. The number of shift operations will be the same number of the number of inversions. Thus they linearly proportional.
+
+d. Merge-Sort(A, l, r)\\
+\begin{algorithm}[H]
+	\If{l=r}{
+		return
+	}
+	m=(l+r)/2\\
+	Merge-Sort(A, l, m)\\
+	Merge-Sort(A, m+1, r)\\
+	Merge(A, l, m, m+1, r)
+\end{algorithm}
+
+//assume that count is a global initialized to 0\\
+Merge(A, l1, r1, l2, r2)\\
+\begin{algorithm}[H]
+	Copy A[l1:r2] to B[1:r2-l1+1]\\
+	i=1; j=1+l2-l1; k=l1;\\
+	\While{$ i<=r1 \ \text{and}\  j<=r2 $}{
+		\If{$ B[i]<B[j] $}{
+			A[k]=B[i]\\
+			i=i+1\\
+			k=k+1
+		}\Else{
+			A[k]=B[j]\\
+			j=j+1\\
+			k=k+1\\
+			count = count+r1-i+1
+		}
+	}
+	\While{$ i<=r1 $}{
+		A[k]=B[i]\\
+		i=i+1\\
+		k=k+1
+	}
+	\While{$ j<=r2 $}{
+		A[k]=B[j]\\
+		j=j+1\\
+		k=k+1\\
+		count = count+r1-i+1	
+	}
+\end{algorithm}
+
+After execution, count will be the number of inversions. The modification adds only constant number of operations of each subroutine, thus the runtime will still be $\Theta(n\lg(n))$
+
 
 \end{enumerate}
 \end{document}
