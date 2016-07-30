@@ -15,6 +15,32 @@ $ \exists c1=1>0, k1>0, \forall n>k1, \max(f(n),g(n)<=f(n)+g(n) $\\
 $ \exists c2=0.5>0, k2>0, \forall n>k2, \max(f(n),g(n)>=0.5*(f(n)+g(n)) $\\
 Therefore, $ \max(f(n),g(n)) = \Theta(f(n)+g(n)) $
 
-\item[3.1-2]
+\item[3.1-2] $ \frac{(n+a)^b}{n^b} = (1+\frac{a}{n})^b \in (1/2, 2)\ \  \text{as}\ \  n \to \infty$
+
+Thus $(n+a)^b = \Theta(n^b)$
+
+\item[3.1-3] It is meaningless because the $O$ notation is a upper bound, while "At least" is supposed to demonstrate some lower bound of the running time.
+
+\item[3.1-4] $2^{n+1} = O(2^n)$ since $2^{n+1} < 3*2^{n}$\\
+$2^{2n} \neq O(2^n)$ since $\frac{2^{2n}}{2^n} = 2^n \ \ \to \ \ \infty$ as n goes to infinity
+
+\item[3.1-5] Prove that $f(n) = \Theta(g(n))$ if and only if\\ $f(n) = O(g(n))$ and $ f(n) = \Omega(g(n)) $
+
+Just rewrite the definitions and it is easy to find how this relationship holds.
+
+\item[3.1-6] If and algorithm has running time $\Theta(g(n))$, then it must be both $O(g(n))$ and $\Omega(g(n))$\\
+Since it includes the worst case and the best case, then it is trivial that $ T_{worst} = O(g(n)) $ and $T_{best} = \Omega(g(n))$
+
+\item[3.1-7] Prove that $o(g(n) \cap \omega(g(n)) = \emptyset $\\
+Suppose there is a function $f(n)$ in this intersection set. Then by the property of these two notations, we can see that $$ \lim\limits_{n\to \infty} \frac{f(n)}{g(n)} = 0\ \  \wedge  \ \ \lim\limits_{n\to \infty}\frac{f(n)}{g(n)} > 0 $$
+which are mutually exclusive. 
+
+\item[3.1-8] Definition of $\Omega(g(n,m))$\\
+$ \Omega(g(n,m)) = \\ \{ f(n,m): \exists \text{c,n0,m0$>$0 s.t.} f(n,m)>=cg(n,m) \forall n>=n0 \wedge m>=m0 \}$
+
+$\Theta(g(n,m)) = \Omega(g(n,m)) \cap O(g(n,m)) $
+
+\item[3.2-1] Proof: \\
+
 \end{enumerate}
 \end{document}
