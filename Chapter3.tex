@@ -41,6 +41,67 @@ $ \Omega(g(n,m)) = \\ \{ f(n,m): \exists \text{c,n0,m0$>$0 s.t.} f(n,m)>=cg(n,m)
 $\Theta(g(n,m)) = \Omega(g(n,m)) \cap O(g(n,m)) $
 
 \item[3.2-1] Proof: \\
+By given condition, we know that\\ $\forall x>y,\ \ f(x)>f(y)$ and $\forall x>y,\ \ f(x)>f(y)$\\
+similar for g(n)
 
+Then it is easy to see that\\ $ \forall x>y, f(x)+g(x)>f(y)+g(y) $\\
+$ \forall x>y,\ \ g(x)>g(y)\implies f(g(x))>f(g(y)) $\\
+If f and g are both nonnegative, then their product will be trivially increasing.
+
+\item[3.2-2] Prove that $ a^{\log_b(c)} = c^{\log_b(a)} $\\
+Suppose the equation holds. Take log a on both sides of the equation, we get $$ \log_b(c) = \log_b(a) \log_a(c) $$
+
+Decompose the log terms with the relation that $ \log_x(y) = \frac{\lg x}{\lg y} $, then it is easy to see that the left hand side and the right side are equivalent.
+
+Since the process above is revertible, it can be deduced that the original equation holds.
+
+\item[3.2-3] Prove that $\lg(n!) = \Theta(n\lg n)$\\
+Proof: $\frac{\lg(n!)}{n\lg(n)} = \frac{\lg(n!)}{\lg(n^n)}$\\
+
+It is easy to say that this term is greater than 0 and is upper-bounded by 1. So the O relation is obvious, now we need to show that this term doesn't converge to 0. 
+
+By Stirling Approximation, 
+$$
+n! = \sqrt{2\pi n}(\frac{ n}{e})^{n}\Theta(1)
+$$
+
+$$ \lg(n!) = 1/2*\lg n + \Theta(\lg(n^n)) = \Theta(\lg(n^n))$$
+
+
+The sum excluding $f(k)$ in the first equation gives $ \Theta(\lg m) $ which is equivalent to $ \Theta(n) $ 
+
+
+
+Then it is trivial to see that $ \lg(n!) = \Theta(n\lg n) $
+
+Prove: $ n! = \omega(2^n) $\\
+Proof: it is true that $ 4! > 2^4 $
+Starting from $n=4$, suppose that $ \frac{n!}{2^n} $ converges to some constant c (say equals $ c-e $ for some infinitesimally small $ e $) when n is greater than k. We can always find some n such that$(n+1)/2 > \frac{c+1}{c-e}$ such that $\frac{(n+1)!}{2^{n+1}} > c$ which contradicts the condition for converging. We can deduce that there can't be upper bound for the result of this division and then we can state that 
+$$
+n! = \omega(2^n)
+$$
+
+Prove: $ n! = o(n^n) $\\
+This can be proved by deducing that $\frac{n!}{n^n}$ is monotonically decreasing and it is bounded by 0 and 1.
+
+\item[3.2-4] Is the function $ \lceil \lg(n) \rceil ! $ polynomially bounded?\\
+No this is not polynomially bounded. Recall the result we have proved in 3.2-3, $$ \lg( \lceil \lg(n) \rceil ! ) = \omega( 2^{\lceil \lg(n) \rceil} ) = \omega (n) $$
+
+However, for any polynomial P(n), $$ \lg(P(n)) = \Theta(n) $$
+
+Thus it is obvious that this function is asymptotically larger than any polynomial.
+
+Is the function $ \lceil \lg \lg(n) \rceil ! $ polynomially bounded?\\
+
+Yes, this function is polynomially bounded. By Stirling's approximation, 
+$$
+\lceil\lg\lg n\rceil! = t! = \sqrt{2\pi t}(\frac{t}{e})^{t}(1+\Theta(1/t))
+$$
+
+$$ \lg (t!) = O(t \lg (t) ) = O(\lceil\lg\lg n\rceil \lceil\lg\lg\lg n\rceil) = O(2^{\lceil\lg\lg n\rceil}) = O(\lg n)$$
+
+while $$ \lg P(n) = \Theta(n)  $$
+
+Thus it is polynomially bounded.
 \end{enumerate}
 \end{document}
