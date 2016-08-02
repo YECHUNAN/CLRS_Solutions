@@ -7,7 +7,7 @@
 \author{}
 
 \begin{document}
-\title{Chapter 2 solution}
+\title{Chapter 3 solution}
 \maketitle
 \begin{enumerate}
 \item[3.1-1] Since f(n) and g(n) are both nonnegative\\
@@ -103,5 +103,39 @@ $$ \lg (t!) = O(t \lg (t) ) = O(\lceil\lg\lg n\rceil \lceil\lg\lg\lg n\rceil) = 
 while $$ \lg P(n) = \Theta(n)  $$
 
 Thus it is polynomially bounded.
+
+\item[3.2-5] Which is asymptotically larger? $ \lg(\lg^* n) $ or $ \lg^*(\lg n) $
+
+Actually, $ \lg^*(\lg n) = \lg^* n -1 = \Theta(\lg^* n)$
+
+But $ \lg(\lg^* n) = \Theta(\lg(\lg^* n)) $
+
+Thus the second function is asymptotically larger.
+
+\item[3.2-6] Since we already know the value of $\phi$ and $\hat{\phi}$, just plug them into the equation and we can see the satisfaction.
+
+\item[3.2-7] Show that $ F_i = \frac{\phi^i-\hat{\phi^i}}{\sqrt{5}} $ by induction
+
+When $i=0$, $F_0 = 0$\\
+Suppose $ F_k =  \frac{\phi^k-\hat{\phi^k}}{\sqrt{5}} $ and $ F_{k-1} =  \frac{\phi^{k-1}-\hat{\phi^{k-1}}}{\sqrt{5}} $, \\then 
+$F_{k+1} = F_{k-1} + F_k = \frac{\phi^{k-1}-\hat{\phi^{k-1}} + \phi^k-\hat{\phi^k}}{\sqrt{5}} $
+
+extract the reciprocal of the k-1 term and add it with k term, it is easy to see that this is exactly the form of k+1. Then by induction, we show that this is the formula for Fibonacci number for all i.
+
+\item[3.2-8] Show that $ k\ln(k) = \Theta(n) $ implies that $ k=\Theta(n/\ln(n)) $
+
+Take ln on both side of the given relation
+$ \ln k + \ln\ln k = \Theta(\ln n) $\\
+The left hand side has $ \ln k+\ln\ln k = \Theta(\ln n) $\\
+Thus $ \Theta(\ln k) = \Theta(\ln n) \implies \ln k= \Theta (\ln n) $\\
+This works because this is a two sided bound instead of O or $\Omega$ and taking lg will shrink the range of both sides of the equation instead of expanding them.
+
+By taking the reciprocal of the two sided constants, we can see that\\
+ $ \frac{1}{\ln k} = \Theta(\frac{1}{\ln n}) $
+
+Multiply with the original relation, we get\\
+$ k = \Theta(n/ \ln n) $
+
+\item[3-1]
 \end{enumerate}
 \end{document}
