@@ -2,6 +2,8 @@
 \usepackage[linesnumbered,boxed]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{array}
 %opening
 \title{}
 \author{}
@@ -136,6 +138,137 @@ By taking the reciprocal of the two sided constants, we can see that\\
 Multiply with the original relation, we get\\
 $ k = \Theta(n/ \ln n) $
 
-\item[3-1]
+\item[3-1] $ p(n) = \sum\limits_{i=0}^{d} a_in^i ,\ \ a_d>0$\\
+Prove the following statements:\\
+a. If $k>=d$ then $ p(n) = O(n^k) $\\
+Since $n^k$ is asymptotically larger than the sum of $ 1+n+n^2+...+n^{k-1} >= 1+n+n^2+...+n^{d} $\\
+Let the constant $ c=\sum\limits_{i=0}^{d} |a_i| $ then write the definition of the O relation. It will be easy to see that $ p(n) < c*n^k $. Thus $ p(n) = O(n^k) $
+
+b. $\frac{n^k}{p(n)} = 1 + c_1/n+... <2 $ as n goes to infinity since $k<=d$. Reverse the inequality and it's easy to show that $p(n)=\Omega(n^k)$
+
+c. Combine the result of a and b will be sufficient.
+
+d. This directly follows the method of b. Just show that $ \frac{p(n)}{n^k} \to 0 $ as n goes to infinity.
+
+e. Similar to d but in the converse way.
+
+\item[3-2] Relative asymptotic growths
+
+Whether A is *(B) or not.\\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+A & B & O & o & $ \Omega $ & $\omega$ & $ \Theta $\\
+\hline
+$\lg^k n$ & $n^{\epsilon} $ & yes & yes & no & no & no\\
+\hline
+$ n^k $ & $c^n$ & yes & yes & no & no & no\\
+\hline
+$\sqrt{n}$ & $ n^{\sin(n)} $ & no & no & no & no & no\\
+\hline
+$2^n$ & $ 2^{n/2} $ & no & no & yes & yes & no\\
+\hline
+$　n^{\lg c} $ & $ c^{\lg n} $ & yes & no & yes & no & yes\\
+\hline
+$ \lg(n!) $ & $\lg(n^n)$ & yes & no & yes & no & yes\\
+\hline
+\end{tabular}
+
+\item[3-3] I get a sorted list from CLRS study group on its website, I checked some pairs but didn't covered all the checking tasks. Some comparisons are still confusing to me.
+
+From asymptotically smallest to largest:\\
+1. $ 1 = n^{1/\lg n} $\\
+2. $ \lg(\lg^* n) $\\
+3. $ \lg^*(n) = \lg^*(\lg n) $\\
+4. $ 2^{\lg^* n} $\\
+5. $ \ln \ln n $\\
+6. $ \sqrt{\lg n} $\\
+7. $ \ln n $\\
+8. $ \lg^2(n) $\\
+9. $ 2^{\sqrt{2\ln n}} $\\
+10.$ (\sqrt{n})^{\lg n} $\\
+11.$ n=2^{\lg n} $\\
+12.$ \lg(n!) = n\lg n$\\
+13.$ n^2 = 4^{\lg n}  $\\
+14.$ n^3 $\\
+15.$ n^{\lg \lg n} = (\lg n)^{\lg n} $\\
+16.$ (\frac{3}{2})^{n} $\\
+17.$ n2^n $\\
+18.$ e^n $\\
+19.$ n! $\\
+20.$ (n+1)! $\\
+21.$ 2^{2^{n}} $\\
+22.$ 2^{2^{n+1}} $\\
+
+\item[3-4] Prove or disprove the following statements
+
+a. $ f(n) = O(g(n)) $ implies $g(n) = O(f(n))$\\
+False. Take $ f(n) = 1,g(n) = n $ and try the definition.
+
+b. $ f(n) + g(n) = \Theta(\min(f(n),g(n)) $\\
+False. Take $ f(n) = 1,g(n) = n $ and it fall back to the same relation in one, which can't be true.
+
+c. $ f(n) = O(g(n)) $ implies that $ \lg(f(n)) = O(\lg(g(n))) $ if f(n) and lg(g(n)) are greater or equal to one for sufficiently large n.\\
+True. From definition,\\
+$ f(n) < c*g(n) \implies \lg(f(n)) < \lg c + \lg (g(n)) < \lg c * \lg(g(n)) $ for sufficiently large constant c.
+
+d. $ f(n) = O(g(n)) $ implies that $ 2^{f(n)} = O(2^{g(n)}) $\\
+False. Take $f(n) = 2n , g(n) = n $\\
+There is no such constant to bound $4^n$ with $ 2^n $ as n goes large enough.
+
+e. $ f(n) = O((f(n))^2) $\\
+False. Let $ f(n) = 1/n $， then it is easy to see the contradiction since $ 1/f(n) $ doesn't converge.
+
+f. $ f(n) = O(g(n)) $ implies $ g(n) = \Omega(f(n)) $\\
+True. It can be proved by directly writing the definition.
+
+g. $ f(n) = \Theta(f(n/2)) $\\
+False. Let $f(n) = 2^n$. $ f(n)/f(n/2) = 2^{n/2} $, which doesn't converge.
+
+h. $ f(n) + o(f(n)) = \Theta(f(n)) $\\
+True. Set any positive constant c1 and add it by one. We can directly show that $ f(n) + o(f(n)) = O(f(n)) $\\
+Set another positive constant c2 which is smaller than 1. We can directly show that $ f(n) + o(f(n)) = \Omega(f(n)) $\\
+Thus this statement is true.
+
+\item[3-5] a. Suppose that $f(n) = O(g(n)) $ and $f(n) = \mathop{\Omega}\limits^{\infty}(g(n)) $ are neither true.
+
+Then for all positive constants c, there is $ f(n) > cg(n) $ for sufficiently large n. Arbitrarily select a positive constant c. There must be infinitely many ns such that $ f(n) > cg(n) $ and this contradicts the assumption that $f(n) = \mathop{\Omega}\limits^{\infty}(g(n)) $ is not true.
+
+This property no longer hold if we replace $ \mathop{\Omega}\limits^{\infty} $ with $ \Omega $\\
+Counter example: $ f(n) = n^{\sin(n)} $ and $ g(n) = \sqrt{n} $
+
+b. I have the same feeling as the author of the CLRS study group did. I can't see anything meaningful to use the infinite Omega instead of the Omega relation since we usually analyze monotonic functions on n in real algorithm problems. The new notation might be helpful for dealing with oscillating functions. 
+
+c. Suppose we don't change the definition of $ \Theta $ either. We can see that $ f(n) = \Theta(g(n)) \implies f(n) = O(g(n)) $ and $ f(n) = \Omega(g(n)) $\\
+The converse way is also true because $ |f(n)|<cg(n) \implies f(n) < cg(n) $ which implies that $ f(n) = O(g(n)) $. Plus $ f(n) = \Omega(g(n)) $, the converse implication also holds.
+
+d. We only need to put the lg term under f(n) and then change the direction of the inequality for soft Omega. The Theta definition is just the intersection of soft O and soft Omega
+
+\item[3-6] Iterated functions\\
+$$ f_c^*(n) = \min{i>=0: f^{(i)}(n)<=c} $$
+\begin{tabular}{|c|c|c|}
+\hline
+f(n) & c & $ f_c^*(n) $\\
+\hline
+n-1 & 0 & $ \Theta(n) $\\
+\hline
+$\lg n$ & 1 & $ \Theta(\lg^*(n)) $\\
+\hline
+n/2 & 1 & $ \Theta(\lg n) $\\
+\hline
+n/2 & 2 & $ \Theta(\lg n +1) $\\
+\hline
+$\sqrt{n}$ & 2 & $ \Theta(\lg \lg n) $\\
+\hline
+$ \sqrt{n} $ & 1 & undefined behavior after $ n>1 $\\
+\hline
+$ n^{1/3} $ & 2 & $ \Theta(\log_3(\lg n)) $\\
+\hline
+$ n/\lg n $ & 2 & $ \omega(\lg\lg n), o(\lg n) $\\
+\hline
+\end{tabular}
+
+I use the result of CLRS study group for the last line. I checked the correctness but I don't know whether there is a more tight bound for it.
+
+Actually, I didn't get the point of dealing with some extremely intricate analysis, though the most examples looks helpful in applications.
 \end{enumerate}
 \end{document}
