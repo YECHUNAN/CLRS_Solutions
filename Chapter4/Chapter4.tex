@@ -1,0 +1,54 @@
+\documentclass[]{article}
+\usepackage[text={180mm,280mm},centering]{geometry}
+%opening
+\title{}
+\author{}
+\begin{document}
+\title{Chapter 4 solution}
+\maketitle
+
+\begin{enumerate}
+\item[4.1-1] FIND-MAXIMUM-SUBARRAY returns the largest negative number in A.
+
+\item[4.1-2] Pseudocode for brute-force solution for maximum-subarray problem.
+
+\begin{verbatim}
+	
+brute_force_maximum_subarray(A):
+    best_sum = -inifinity
+    best_low = -1
+    best_high = -1
+    for int i = 0 ... A.size - 1:
+        sum = A[i]
+        if sum > best_sum:
+            best_sum = sum
+            best_low = i
+            best_high = i
+        for int j = i+1 ... A.size - 1:
+            sum += A[j]
+            if sum > best_sum:
+                best_sum = sum
+                best_low = i
+                best_high = j
+    return best_low, best_high, best_sum
+\end{verbatim}
+
+\item[4.1-3] The crossover point is somewhere between 850 and 875. I don't think there is much point to find out exactly what n is since the performance measurements has too many noises when it comes to tiny differences. 
+
+Replacing the base case of recursive algorithm makes the crossover point lower. In other words, the modified recursive algorithms runs faster on smaller problem size n. See maximum\_subarray.cpp for more details.
+
+\item[4.1-4] Change the initial sum of sub array search to 0 and a special value pair for low and high indicating it's an empty sub array.
+
+\item[4.1-5] Suppose we know the maximum sub array of A[0] to A[j] and we know the maximum sub array that ends at A[j] of A[0] to A[j]. For j+1, compute the following in constant time
+
+\begin{itemize}
+    \item maximum sub array of A[0] to A[j]
+    \item maximum sub array ending at A[j] + A[j+1]
+    \item A[j + 1]
+\end{itemize}
+
+From these, we can easily compute the maximum sub array of A[0] to A[j+1] and the maximum sub array of A[0] to A[j+1] that ends at A[j+1]. Use induction and iterate until we get the maximum sub array of A.
+
+\end{enumerate}
+
+\end{document}
