@@ -1,0 +1,274 @@
+\documentclass[]{article}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{array}
+%opening
+\title{}
+\author{}
+
+\begin{document}
+\title{Chapter 3 solution}
+\maketitle
+\begin{enumerate}
+\item[3.1-1] Since f(n) and g(n) are both nonnegative\\
+$ \exists c1=1>0, k1>0, \forall n>k1, \max(f(n),g(n)<=f(n)+g(n) $\\
+$ \exists c2=0.5>0, k2>0, \forall n>k2, \max(f(n),g(n)>=0.5*(f(n)+g(n)) $\\
+Therefore, $ \max(f(n),g(n)) = \Theta(f(n)+g(n)) $
+
+\item[3.1-2] $ \frac{(n+a)^b}{n^b} = (1+\frac{a}{n})^b \in (1/2, 2)\ \  \text{as}\ \  n \to \infty$
+
+Thus $(n+a)^b = \Theta(n^b)$
+
+\item[3.1-3] It is meaningless because the $O$ notation is a upper bound, while "At least" is supposed to demonstrate some lower bound of the running time.
+
+\item[3.1-4] $2^{n+1} = O(2^n)$ since $2^{n+1} < 3*2^{n}$\\
+$2^{2n} \neq O(2^n)$ since $\frac{2^{2n}}{2^n} = 2^n \ \ \to \ \ \infty$ as n goes to infinity
+
+\item[3.1-5] Prove that $f(n) = \Theta(g(n))$ if and only if\\ $f(n) = O(g(n))$ and $ f(n) = \Omega(g(n)) $
+
+Just rewrite the definitions and it is easy to find how this relationship holds.
+
+\item[3.1-6] If and algorithm has running time $\Theta(g(n))$, then it must be both $O(g(n))$ and $\Omega(g(n))$\\
+Since it includes the worst case and the best case, then it is trivial that $ T_{worst} = O(g(n)) $ and $T_{best} = \Omega(g(n))$
+
+\item[3.1-7] Prove that $o(g(n) \cap \omega(g(n)) = \emptyset $\\
+Suppose there is a function $f(n)$ in this intersection set. Then by the property of these two notations, we can see that $$ \lim\limits_{n\to \infty} \frac{f(n)}{g(n)} = 0\ \  \wedge  \ \ \lim\limits_{n\to \infty}\frac{f(n)}{g(n)} > 0 $$
+which are mutually exclusive. 
+
+\item[3.1-8] Definition of $\Omega(g(n,m))$\\
+$ \Omega(g(n,m)) = \\ \{ f(n,m): \exists \text{c,n0,m0$>$0 s.t.} f(n,m)>=cg(n,m) \forall n>=n0 \wedge m>=m0 \}$
+
+$\Theta(g(n,m)) = \Omega(g(n,m)) \cap O(g(n,m)) $
+
+\item[3.2-1] Proof: \\
+By given condition, we know that\\ $\forall x>y,\ \ f(x)>f(y)$ and $\forall x>y,\ \ f(x)>f(y)$\\
+similar for g(n)
+
+Then it is easy to see that\\ $ \forall x>y, f(x)+g(x)>f(y)+g(y) $\\
+$ \forall x>y,\ \ g(x)>g(y)\implies f(g(x))>f(g(y)) $\\
+If f and g are both nonnegative, then their product will be trivially increasing.
+
+\item[3.2-2] Prove that $ a^{\log_b(c)} = c^{\log_b(a)} $\\
+Suppose the equation holds. Take log a on both sides of the equation, we get $$ \log_b(c) = \log_b(a) \log_a(c) $$
+
+Decompose the log terms with the relation that $ \log_x(y) = \frac{\lg x}{\lg y} $, then it is easy to see that the left hand side and the right side are equivalent.
+
+Since the process above is revertible, it can be deduced that the original equation holds.
+
+\item[3.2-3] Prove that $\lg(n!) = \Theta(n\lg n)$\\
+Proof: $\frac{\lg(n!)}{n\lg(n)} = \frac{\lg(n!)}{\lg(n^n)}$\\
+
+It is easy to say that this term is greater than 0 and is upper-bounded by 1. So the O relation is obvious, now we need to show that this term doesn't converge to 0. 
+
+By Stirling Approximation, 
+$$
+n! = \sqrt{2\pi n}(\frac{ n}{e})^{n}\Theta(1)
+$$
+
+$$ \lg(n!) = 1/2*\lg n + \Theta(\lg(n^n)) = \Theta(\lg(n^n))$$
+
+
+The sum excluding $f(k)$ in the first equation gives $ \Theta(\lg m) $ which is equivalent to $ \Theta(n) $ 
+
+
+
+Then it is trivial to see that $ \lg(n!) = \Theta(n\lg n) $
+
+Prove: $ n! = \omega(2^n) $\\
+Proof: it is true that $ 4! > 2^4 $
+Starting from $n=4$, suppose that $ \frac{n!}{2^n} $ converges to some constant c (say equals $ c-e $ for some infinitesimally small $ e $) when n is greater than k. We can always find some n such that$(n+1)/2 > \frac{c+1}{c-e}$ such that $\frac{(n+1)!}{2^{n+1}} > c$ which contradicts the condition for converging. We can deduce that there can't be upper bound for the result of this division and then we can state that 
+$$
+n! = \omega(2^n)
+$$
+
+Prove: $ n! = o(n^n) $\\
+This can be proved by deducing that $\frac{n!}{n^n}$ is monotonically decreasing and it is bounded by 0 and 1.
+
+\item[3.2-4] Is the function $ \lceil \lg(n) \rceil ! $ polynomially bounded?\\
+No this is not polynomially bounded. Recall the result we have proved in 3.2-3, $$ \lg( \lceil \lg(n) \rceil ! ) = \omega( 2^{\lceil \lg(n) \rceil} ) = \omega (n) $$
+
+However, for any polynomial P(n), $$ \lg(P(n)) = \Theta(n) $$
+
+Thus it is obvious that this function is asymptotically larger than any polynomial.
+
+Is the function $ \lceil \lg \lg(n) \rceil ! $ polynomially bounded?\\
+
+Yes, this function is polynomially bounded. By Stirling's approximation, 
+$$
+\lceil\lg\lg n\rceil! = t! = \sqrt{2\pi t}(\frac{t}{e})^{t}(1+\Theta(1/t))
+$$
+
+$$ \lg (t!) = O(t \lg (t) ) = O(\lceil\lg\lg n\rceil \lceil\lg\lg\lg n\rceil) = O(2^{\lceil\lg\lg n\rceil}) = O(\lg n)$$
+
+while $$ \lg P(n) = \Theta(n)  $$
+
+Thus it is polynomially bounded.
+
+\item[3.2-5] Which is asymptotically larger? $ \lg(\lg^* n) $ or $ \lg^*(\lg n) $
+
+Actually, $ \lg^*(\lg n) = \lg^* n -1 = \Theta(\lg^* n)$
+
+But $ \lg(\lg^* n) = \Theta(\lg(\lg^* n)) $
+
+Thus the second function is asymptotically larger.
+
+\item[3.2-6] Since we already know the value of $\phi$ and $\hat{\phi}$, just plug them into the equation and we can see the satisfaction.
+
+\item[3.2-7] Show that $ F_i = \frac{\phi^i-\hat{\phi^i}}{\sqrt{5}} $ by induction
+
+When $i=0$, $F_0 = 0$\\
+Suppose $ F_k =  \frac{\phi^k-\hat{\phi^k}}{\sqrt{5}} $ and $ F_{k-1} =  \frac{\phi^{k-1}-\hat{\phi^{k-1}}}{\sqrt{5}} $, \\then 
+$F_{k+1} = F_{k-1} + F_k = \frac{\phi^{k-1}-\hat{\phi^{k-1}} + \phi^k-\hat{\phi^k}}{\sqrt{5}} $
+
+extract the reciprocal of the k-1 term and add it with k term, it is easy to see that this is exactly the form of k+1. Then by induction, we show that this is the formula for Fibonacci number for all i.
+
+\item[3.2-8] Show that $ k\ln(k) = \Theta(n) $ implies that $ k=\Theta(n/\ln(n)) $
+
+Take ln on both side of the given relation
+$ \ln k + \ln\ln k = \Theta(\ln n) $\\
+The left hand side has $ \ln k+\ln\ln k = \Theta(\ln n) $\\
+Thus $ \Theta(\ln k) = \Theta(\ln n) \implies \ln k= \Theta (\ln n) $\\
+This works because this is a two sided bound instead of O or $\Omega$ and taking lg will shrink the range of both sides of the equation instead of expanding them.
+
+By taking the reciprocal of the two sided constants, we can see that\\
+ $ \frac{1}{\ln k} = \Theta(\frac{1}{\ln n}) $
+
+Multiply with the original relation, we get\\
+$ k = \Theta(n/ \ln n) $
+
+\item[3-1] $ p(n) = \sum\limits_{i=0}^{d} a_in^i ,\ \ a_d>0$\\
+Prove the following statements:\\
+a. If $k>=d$ then $ p(n) = O(n^k) $\\
+Since $n^k$ is asymptotically larger than the sum of $ 1+n+n^2+...+n^{k-1} >= 1+n+n^2+...+n^{d} $\\
+Let the constant $ c=\sum\limits_{i=0}^{d} |a_i| $ then write the definition of the O relation. It will be easy to see that $ p(n) < c*n^k $. Thus $ p(n) = O(n^k) $
+
+b. $\frac{n^k}{p(n)} = 1 + c_1/n+... <2 $ as n goes to infinity since $k<=d$. Reverse the inequality and it's easy to show that $p(n)=\Omega(n^k)$
+
+c. Combine the result of a and b will be sufficient.
+
+d. This directly follows the method of b. Just show that $ \frac{p(n)}{n^k} \to 0 $ as n goes to infinity.
+
+e. Similar to d but in the converse way.
+
+\item[3-2] Relative asymptotic growths
+
+Whether A is *(B) or not.\\
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+A & B & O & o & $ \Omega $ & $\omega$ & $ \Theta $\\
+\hline
+$\lg^k n$ & $n^{\epsilon} $ & yes & yes & no & no & no\\
+\hline
+$ n^k $ & $c^n$ & yes & yes & no & no & no\\
+\hline
+$\sqrt{n}$ & $ n^{\sin(n)} $ & no & no & no & no & no\\
+\hline
+$2^n$ & $ 2^{n/2} $ & no & no & yes & yes & no\\
+\hline
+$　n^{\lg c} $ & $ c^{\lg n} $ & yes & no & yes & no & yes\\
+\hline
+$ \lg(n!) $ & $\lg(n^n)$ & yes & no & yes & no & yes\\
+\hline
+\end{tabular}
+
+\item[3-3] I get a sorted list from CLRS study group on its website, I checked some pairs but didn't covered all the checking tasks. Some comparisons are still confusing to me.
+
+From asymptotically smallest to largest:\\
+1. $ 1 = n^{1/\lg n} $\\
+2. $ \lg(\lg^* n) $\\
+3. $ \lg^*(n) = \lg^*(\lg n) $\\
+4. $ 2^{\lg^* n} $\\
+5. $ \ln \ln n $\\
+6. $ \sqrt{\lg n} $\\
+7. $ \ln n $\\
+8. $ \lg^2(n) $\\
+9. $ 2^{\sqrt{2\ln n}} $\\
+10.$ (\sqrt{n})^{\lg n} $\\
+11.$ n=2^{\lg n} $\\
+12.$ \lg(n!) = n\lg n$\\
+13.$ n^2 = 4^{\lg n}  $\\
+14.$ n^3 $\\
+15.$ n^{\lg \lg n} = (\lg n)^{\lg n} $\\
+16.$ (\frac{3}{2})^{n} $\\
+17.$ n2^n $\\
+18.$ e^n $\\
+19.$ n! $\\
+20.$ (n+1)! $\\
+21.$ 2^{2^{n}} $\\
+22.$ 2^{2^{n+1}} $\\
+
+\item[3-4] Prove or disprove the following statements
+
+a. $ f(n) = O(g(n)) $ implies $g(n) = O(f(n))$\\
+False. Take $ f(n) = 1,g(n) = n $ and try the definition.
+
+b. $ f(n) + g(n) = \Theta(\min(f(n),g(n)) $\\
+False. Take $ f(n) = 1,g(n) = n $ and it fall back to the same relation in one, which can't be true.
+
+c. $ f(n) = O(g(n)) $ implies that $ \lg(f(n)) = O(\lg(g(n))) $ if f(n) and lg(g(n)) are greater or equal to one for sufficiently large n.\\
+True. From definition,\\
+$ f(n) < c*g(n) \implies \lg(f(n)) < \lg c + \lg (g(n)) < \lg c * \lg(g(n)) $ for sufficiently large constant c.
+
+d. $ f(n) = O(g(n)) $ implies that $ 2^{f(n)} = O(2^{g(n)}) $\\
+False. Take $f(n) = 2n , g(n) = n $\\
+There is no such constant to bound $4^n$ with $ 2^n $ as n goes large enough.
+
+e. $ f(n) = O((f(n))^2) $\\
+False. Let $ f(n) = 1/n $， then it is easy to see the contradiction since $ 1/f(n) $ doesn't converge.
+
+f. $ f(n) = O(g(n)) $ implies $ g(n) = \Omega(f(n)) $\\
+True. It can be proved by directly writing the definition.
+
+g. $ f(n) = \Theta(f(n/2)) $\\
+False. Let $f(n) = 2^n$. $ f(n)/f(n/2) = 2^{n/2} $, which doesn't converge.
+
+h. $ f(n) + o(f(n)) = \Theta(f(n)) $\\
+True. Set any positive constant c1 and add it by one. We can directly show that $ f(n) + o(f(n)) = O(f(n)) $\\
+Set another positive constant c2 which is smaller than 1. We can directly show that $ f(n) + o(f(n)) = \Omega(f(n)) $\\
+Thus this statement is true.
+
+\item[3-5] a. Suppose that $f(n) = O(g(n)) $ and $f(n) = \mathop{\Omega}\limits^{\infty}(g(n)) $ are neither true.
+
+Then for all positive constants c, there is $ f(n) > cg(n) $ for sufficiently large n. Arbitrarily select a positive constant c. There must be infinitely many ns such that $ f(n) > cg(n) $ and this contradicts the assumption that $f(n) = \mathop{\Omega}\limits^{\infty}(g(n)) $ is not true.
+
+This property no longer hold if we replace $ \mathop{\Omega}\limits^{\infty} $ with $ \Omega $\\
+Counter example: $ f(n) = n^{\sin(n)} $ and $ g(n) = \sqrt{n} $
+
+b. I have the same feeling as the author of the CLRS study group did. I can't see anything meaningful to use the infinite Omega instead of the Omega relation since we usually analyze monotonic functions on n in real algorithm problems. The new notation might be helpful for dealing with oscillating functions. 
+
+c. Suppose we don't change the definition of $ \Theta $ either. We can see that $ f(n) = \Theta(g(n)) \implies f(n) = O(g(n)) $ and $ f(n) = \Omega(g(n)) $\\
+The converse way is also true because $ |f(n)|<cg(n) \implies f(n) < cg(n) $ which implies that $ f(n) = O(g(n)) $. Plus $ f(n) = \Omega(g(n)) $, the converse implication also holds.
+
+d. We only need to put the lg term under f(n) and then change the direction of the inequality for soft Omega. The Theta definition is just the intersection of soft O and soft Omega
+
+\item[3-6] Iterated functions\\
+$$ f_c^*(n) = \min{i>=0: f^{(i)}(n)<=c} $$
+\begin{tabular}{|c|c|c|}
+\hline
+f(n) & c & $ f_c^*(n) $\\
+\hline
+n-1 & 0 & $ \Theta(n) $\\
+\hline
+$\lg n$ & 1 & $ \Theta(\lg^*(n)) $\\
+\hline
+n/2 & 1 & $ \Theta(\lg n) $\\
+\hline
+n/2 & 2 & $ \Theta(\lg n +1) $\\
+\hline
+$\sqrt{n}$ & 2 & $ \Theta(\lg \lg n) $\\
+\hline
+$ \sqrt{n} $ & 1 & undefined behavior after $ n>1 $\\
+\hline
+$ n^{1/3} $ & 2 & $ \Theta(\log_3(\lg n)) $\\
+\hline
+$ n/\lg n $ & 2 & $ \omega(\lg\lg n), o(\lg n) $\\
+\hline
+\end{tabular}
+
+I use the result of CLRS study group for the last line. I checked the correctness but I don't know whether there is a more tight bound for it.
+
+Actually, I didn't get the point of dealing with some extremely intricate analysis, though the most examples looks helpful in applications.
+\end{enumerate}
+\end{document}
